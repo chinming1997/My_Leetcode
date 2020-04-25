@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int next(int num)
+    {
+        int total = 0;
+        while(num)
+        {
+            int d = num%10;
+            num/=10;
+            total += d*d;
+        }
+        return total;
+    }
+    
+    bool isHappy(int n)
+    {
+        int fast = n;
+        int slow = n;
+        
+        do
+        {
+            slow = next(slow); #走一步
+            fast = next(next(fast)); #走兩步
+        }while(slow!=fast);
+	#如果其中一個已經到終點 = 1 不管再走幾步都還是1
+	如果兩個都會陷入循環 做到他們相遇為止
+        
+        return fast == 1;
+    }
+};

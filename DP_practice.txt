@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        
+      if(prices.size()<=1) return 0; //遞迴終止條件
+      int profit;
+      int max = 0;
+
+      1)決定最後一天不賣
+      profit = maxProfit(prices,prices.size()-1)//拿掉最後一項
+      if(profit > max){ max = profit;}
+
+      2)決定最後一天賣
+      for(int i = 1 ; i<prices.size()-1;i++)
+	{
+	 profit = maxProfit(prices,i) + prices[prices.size()-1] - price[i-1];
+	 if(profit > max){ max = profit;}
+	}
+
+    }
+};

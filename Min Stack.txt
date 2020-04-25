@@ -1,0 +1,47 @@
+class MinStack {
+public:
+    vector<int>set;
+    int datamin ;
+    MinStack() 
+    {
+        datamin = INT_MAX;
+    }
+    
+    void push(int x) {
+        datamin = min(datamin,x);
+        set.push_back(x);
+    }
+    
+    void pop() {
+        if(datamin==set.back())
+        {
+            datamin = INT_MAX;
+            set.pop_back();
+            for(int i = 0 ; i<set.size() ; i++)
+            {
+                datamin = min(set[i],datamin);
+            }
+        }
+        else
+        {
+            set.pop_back();
+        }
+    }
+    
+    int top() {
+         return set.back();
+    }
+    
+    int getMin() {
+        return datamin; 
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */

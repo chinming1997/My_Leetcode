@@ -1,0 +1,49 @@
+我的想法是直接從右邊開始找最下層
+如果是1代表那行至少有一個1了直接記
+如果連最底都是0代表那行以左不會再有1
+
+/**
+ * // This is the BinaryMatrix's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * class BinaryMatrix {
+ *   public:
+ *     int get(int x, int y);
+ *     vector<int> dimensions();
+ * };
+ */
+
+class Solution {
+public:
+    int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) 
+    {
+        vector<int> vec = binaryMatrix.dimensions();
+        int n = vec[0];
+        int m = vec[1];
+        int index = 0;
+        bool flag = false;//有沒有找到至少一行有1
+        bool zero = false;//在找的過程碰到有一行全0就停止
+        for(int j = m - 1 ; j >= 0 ; j--)
+        {
+            for(int i = n-1 ; i >= 0 ; i--)
+            {
+                if(binaryMatrix.get(i,j)==1)
+                {
+                    index = j;
+                    flag = true;
+                    break;
+                }
+                if(i==0)
+                {
+                    zero = true;
+                }
+            }
+            if(!flag || zero)
+            {
+                break;
+            }
+        }
+        if(flag) return index;
+        else return -1;
+       
+    }
+};

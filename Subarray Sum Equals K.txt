@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k)
+    {
+        int sum = 0;
+        int count = 0;//ans
+        map<int,int>hash;
+        hash[0] = 1;//表示取到目前為止的array所有item
+        for(int n : nums)
+        {
+            sum += n;
+            count += hash[sum-k];
+            hash[sum]++;
+        }
+        return count;
+    }
+};

@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool canJump(vector<int>& nums) 
+    {
+        int max = 0; //讽玡ǐ程˙计
+        int i; //index
+        for(i = 0 ; i<nums.size() ; i++)
+        {
+            if(i > max)//讽玡ǐ程˙计常ǐぃ = 笿0
+            {
+                break;
+            }
+            max = std::max(max,i+nums[i]);//瞷竚+瞷ǐ˙计耕环
+        }
+        return i==nums.size();
+    }
+};

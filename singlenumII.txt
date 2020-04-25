@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int singleNumber(vector<int>& nums)
+    {
+        int result = 0;
+        for(int i = 0 ; i<32; i++)
+        {
+            int bit = 1;
+            bit<<=i; #秈簿
+            int count = 0;
+            for(auto num : nums)
+            {
+                if((num&bit)!=0) #璝andぃ0 ボウ赣秈竚1
+                {
+                    count++;
+                }
+            }
+            if(count%3!=0) #狦瞷3Ω计 ボ赣计常琌狡瞷Ω计 
+            {
+                result |= bit; #ぃ3计玥氮计
+            }
+            
+        }
+       
+        return result;
+    }
+};
