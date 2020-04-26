@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<vector<int>> groupThePeople(vector<int>& groupSizes)
+    {
+      
+        vector<vector<int>> groupThePeople;
+        for(int i = 0 ; i<groupSizes.size();i++)
+        {
+            vector<int> group;
+            if(groupSizes[i]!=-1)
+            {
+                int max = groupSizes[i];
+                group.push_back(i);
+                for(int j = i+1 ; j<groupSizes.size();j++)
+                 {
+                    if(group.size()==max)
+                    {
+                        break;
+                    }
+                    else if(groupSizes[j]==max)
+                    {
+                        group.push_back(j);
+                        groupSizes[j] = -1;
+                    }
+                 }
+            }
+            if(!group.empty())groupThePeople.push_back(group);
+        }
+        return groupThePeople;
+    }
+};
