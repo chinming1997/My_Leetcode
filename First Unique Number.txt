@@ -1,0 +1,33 @@
+class FirstUnique {
+public:
+    FirstUnique(vector<int>& nums)
+    {
+       if(nums.empty()) return;
+       for(int i = 0 ; i<nums.size() ; i++)
+       {
+           freq[nums[i]]++;
+           if(freq[nums[i]] == 1) Unique.push(nums[i]);  
+       } 
+       while(!Unique.empty() && freq[Unique.front()]>1)
+       {
+           Unique.pop();
+       }
+    }
+    
+    int showFirstUnique()
+    {
+        return Unique.empty()? -1 : Unique.front();
+    }
+    
+    void add(int value) {
+        freq[value]++;
+        if(freq[value] == 1) Unique.push(value);  
+        while(!Unique.empty() && freq[Unique.front()]>1)
+       {
+           Unique.pop();
+       }
+    }
+private:
+     queue<int>Unique;
+     map<int,int>freq;
+};

@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+   
+    if(matrix.empty()) return 0;
+    int col = matrix.size();
+    int row = matrix[0].size();
+    int ans = 0;
+    int temp = 0;
+	int start = 0;
+	for (int i = 0; i < col; i++)
+	{
+		for (int j = 0; j < row; j++)
+		{
+			if (matrix[i][j] != '0')
+			{
+				temp = 1;
+				bool find = true;
+				while (true)
+				{
+					for (int x = 0; x < temp ; x++)
+					{
+						for (int y = 0; y < temp; y++)
+						{
+							if (i + x >= col || j + y >= row || matrix[i + x][j + y] == '0')
+							{
+								find = false;
+								break;
+							}
+						}
+						if (!find) break;
+					}
+					if (!find) break;
+					start = temp;
+					temp++;
+				}	
+			}
+            ans = max(ans, start);
+		}
+	}
+	return ans*ans;
+    }    
+};
