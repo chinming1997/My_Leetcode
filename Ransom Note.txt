@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) 
+    {
+        int i;
+        int j;
+        int ans = 0;
+        for(i = 0 ; i < ransomNote.size() ; i++)
+        {
+             for(j = 0 ; j < magazine.size() ; j++)
+             {
+                if(magazine[j]==' ') continue;
+                if(magazine[j]==ransomNote[i])
+                {
+                    magazine[j] = ' ';
+                    ans++;
+                    break;
+                }
+             }
+        }
+        return ans >= ransomNote.size(); 
+    }
+};
