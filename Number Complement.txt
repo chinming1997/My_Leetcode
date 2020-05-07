@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int findComplement(int num)
+    {
+        int index = 0;
+        int complement = 0;
+        while(num)
+        {
+            if(num%2==0)
+            {
+                complement+=pow(2,index);
+            }
+            index++;
+            num/=2;
+        }
+        return complement;
+    }
+};
