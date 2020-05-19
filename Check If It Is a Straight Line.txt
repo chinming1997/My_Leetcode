@@ -1,0 +1,45 @@
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& coordinates)
+    {
+        int leng = coordinates.size();
+        if(leng==2) return true;
+        
+        bool straight = false;
+        int line = 0;
+        double Slope;
+        if(coordinates[0][0]-coordinates[1][0]==0)
+        {
+            straight = true;
+            line = coordinates[0][0];
+        }
+        else if(coordinates[0][1]-coordinates[1][1]==0)
+        {
+            straight = true;
+            line = coordinates[0][1];
+        }
+        else Slope = (coordinates[0][0]-coordinates[1][0])/(coordinates[0][1]-coordinates[1][1]);
+        
+        for(int i = 2 ; i < leng ; i++)
+        {
+            if(straight)
+            {
+                if( line == coordinates[0][1] && line != coordinates[i-1][1])
+                {
+                    return false;
+                }
+                else if( line == coordinates[0][0] && line != coordinates[i-1][0])
+                {
+                    return false;
+                }
+            }
+            else
+            {
+            if(coordinates[i-1][0]-coordinates[i][0] == 0 || coordinates[i-1][1]-coordinates[i][1]==0) return false;
+            double s = (coordinates[i-1][0]-coordinates[i][0])/(coordinates[i-1][1]-coordinates[i][1]);
+            if(s!=Slope) return false;
+            }
+        }
+        return true;
+    }
+};

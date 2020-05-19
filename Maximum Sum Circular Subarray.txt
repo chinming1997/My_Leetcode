@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& A) 
+    {
+        if(A.empty()) return 0;
+        
+        int MaxTillHere = A[0];
+        int MaxTotal = A[0];//计い程㎝
+        int MinTillHere = A[0];
+        int MinTotal = A[0];//计い程㎝
+        int sum = A[0];
+        
+        for(int i = 1 ; i<A.size() ; i++)
+        {
+            sum+=A[i];
+            
+            if(A[i]+MaxTillHere > A[i])
+            {
+                MaxTillHere+=A[i];
+            }
+            else
+            {
+                MaxTillHere=A[i];
+            }
+            
+            MaxTotal = max(MaxTotal,MaxTillHere);
+            
+            if(A[i]+MinTillHere < A[i])
+            {
+                MinTillHere+=A[i];
+            }
+            else
+            {
+                MinTillHere=A[i];
+            }
+            MinTotal = min(MinTotal,MinTillHere);
+            
+        }
+        if(sum==MinTotal) return MaxTotal; //ボ计璽计程璽计
+        return max(sum-MinTotal,MaxTotal);//玡ボ程计吏
+
+
+	5 -3 5
+        sum = 7 MinTotal = -3  7-(-3) = 10 (A[0]+A[2])
+    }
+};

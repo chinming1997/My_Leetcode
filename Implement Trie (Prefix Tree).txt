@@ -1,0 +1,82 @@
+class TrieNode{
+public:
+    TrieNode* table[128];
+    bool isWord = false;
+        
+    TrieNode()
+    {
+        memset(table, 0, sizeof(TrieNode*) * 128);
+        isWord = false;
+    }
+};
+class Trie {
+public:
+    TrieNode* head;
+    Trie() 
+    {
+        head = new TrieNode();
+    }
+    void insert(string word) 
+    {
+        TrieNode* pnode = head;
+        for(int i = 0 ; i<word.size();i++)
+        {
+            if(!pnode->table[word[i]])
+            {
+                pnode->table[word[i]] = new TrieNode();
+            }
+            pnode = pnode->table[word[i]];
+        }
+        pnode->isWord = true;
+    }
+    bool search(string word) {
+        TrieNode* pnode = head;
+        for(int i = 0 ; i<word.size();i++)
+        {
+            if(!pnode->table[word[i]])
+            {
+                return false;
+            }
+            pnode = pnode->table[word[i]];
+        }
+        return pnode->isWord;
+    }
+    
+    bool startsWith(string prefix) {
+        TrieNode* pnode = head;
+        for(int i = 0 ; i<prefix.size();i++)
+        {
+            if(!pnode->table[prefix[i]])
+            {
+                return false;
+            }
+            pnode = pnode->table[prefix[i]];
+        }
+        return true;
+    }
+     void deleteNode(TrieNode* pnode)
+     {
+         if(!pnode) return;
+         for(int i = 0;i < 128;i++)
+         {
+             if(!pnode->table[i])
+            {
+                deleteNode(pnode->table[i]);
+                delete pnode->table[i];
+            }
+         }
+     }
+    ~Trie()
+    {
+        deleteNode(head);
+        delete head;
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
